@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+  <title>User Management</title>
+  <link href="https://use.fontawesome.com/releases/v6.5.1/css/all.css" media="screen" rel="stylesheet"
+    crossorigin="anonymous">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Arial:400,700" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/reset.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/amember.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/public/theme.css" rel="stylesheet">
+  <style type="text/css" media="screen">
+    #infoext {
+      color: black;
+    }
+
+    .button1 {
+      background-color: #4CAF50;
+      /* Green */
+      border: none;
+      color: white;
+      padding: 16px 80px;
+      text-align: center;
+      border-radius: 100px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 22px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+    }
+
+
+
+    .button2 {
+      background-color: white;
+      color: black;
+      border: 2px solid black;
+    }
+
+    .button2:hover {
+      background-color: #ff7b00;
+      color: #ffff;
+    }
+
+    .buttonext {
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      padding: 12px 24px;
+      border: 3px solid #000000;
+      border-radius: 100px;
+      background: #ffffff;
+      background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));
+      background: -moz-linear-gradient(top, #ffffff, #ffffff);
+      background: linear-gradient(to bottom, #ffffff, #ffffff);
+      font: normal normal bold 20px arial;
+      color: #000000;
+      text-decoration: none;
+    }
+
+    .buttonext:hover,
+    .buttonext:focus {
+      color: #e6e6fa;
+      text-decoration: none;
+    }
+
+    .buttonext:active {
+      background: #e6e6fa;
+      background: -webkit-gradient(linear, left top, left bottom, from(#999999), to(#ffffff));
+      background: -moz-linear-gradient(top, #999999, #ffffff);
+      background: linear-gradient(to bottom, #999999, #ffffff);
+    }
+
+    .buttonext:before {
+      content: "\0000a0";
+      display: inline-block;
+      height: 24px;
+      width: 24px;
+      line-height: 24px;
+      margin: 0 4px -6px -4px;
+      position: relative;
+      top: 0px;
+      left: 0px;
+      background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB6UlEQVRIibXVMWsUURAH8F+WI0g4QrC6wipIEBFLawliFfwUYiVWFhZ+ExGxuI8hIjGoXCFBLERSWIiIBAnhEI3cWbx5uXeb291L4cCws2//M/8382berqDyHyUHn7RgVnGhtjY5j13PoMI2nuEA49AvGOJ2zafTLhe38ALTQsf4VVt7iU1LShV6E4cR4AD3g7CPdVzDw8hkih+4Ufg3qQrXcRSOTyJoU8p9PA3sYWxiUTVO7R5G4fDccl1VFSSvIkYjwU4Av0ql6Eo5ax/fwndH6raFJRoG6FHbLhrsx+F7gmPs4V5kdIr/HKArLSWpS3bejCzG+G3WZW8wyOBxsK81pFhqr9hd1lWpXBelGcnn+U4M6LHUQWstpRCB90J7DZh8NvtB8gA+xsvljrL0zaa634HNjTOq8DYW7+gYmJq0YV/jD67CLWfbtAzSlUHTMI7xk1TP3SAZOlv3Xs2pJCi/l7JtdmeppHvmCN/NBiYTj6SWqxMM4tuu+c7aMDvku2VaW6H5vbxCPkg9nwk2Y20amJzFWhF8JNq07e4ZFIE+SRN7EnYmHhT4DWnw3uNSXqyK5yItSUrNwev49dj53HVdyqKuqJOUOz/XH61NBlJ9982XpVVWgmCyJFE+zL/LElgQ+Fw/9C77H4nYhT6dogCuAAAAAElFTkSuQmCC") no-repeat left center transparent;
+      background-size: 100% 100%;
+    }
+
+    h {
+      color: white;
+      font-size: 125%;
+    }
+
+    h3#cache {
+      padding-top: 38px;
+      color: black;
+    }
+
+    #har {
+      display: none;
+    }
+
+    .am-body .am-body-content-wrapper {
+
+      border-radius: 20px;
+
+    }
+
+    ul.am-tabs,
+    .am-block {
+
+      border-radius: 9px;
+
+    }
+
+    .am-credits {
+      display: none;
+    }
+  </style>
+  <style type="text/css" media="screen">
+    ul.am-tabs #menu-member {
+      width: auto;
+    }
+
+    ul.am-tabs #menu-member::before {
+      margin: 0;
+      display: none;
+    }
+  </style>
+  <style type="text/css" media="screen">
+    .am-footer .am-footer-content-content {
+      display: block;
+    }
+  </style>
+</head>
+
+<body class="am-logged-in am-page-main">
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+</body>
+
+</html>
