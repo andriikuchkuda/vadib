@@ -29,10 +29,41 @@ export const getProducts = async (req, res) => {
 export const getCustomers = async (req, res) => {
   try {
     const customers = await User.find({ role: "user" }).select("-password");
-    console.log(customers, '12345')
+
     res.status(200).json(customers);
   } catch (error) {
     res.status(404).json({ message: error.message });
+  }
+};
+
+export const editCustomers = async (req, res) => {
+  const {name, email, transaction, role, isNew} = req.body;
+
+  try {
+    if(!name || !email ) {
+      const error = new Error();
+      error.message = 'Must fill out name and email!';
+      throw error;
+    }
+
+    const update = {
+      $set : {name , email, transaction, role : role ? role : 'user'}
+    }
+
+    const customer = await User.findOneAndUpdate(
+      { email : email},
+      update,
+      { new : true,
+        upsert : true
+      }
+    );
+
+    
+    const customers = await User.find({ role: "user" }).select("-password");
+
+    res.status(200).json(customers);
+  } catch (error) {
+    res.json({ message: error.message });
   }
 };
 

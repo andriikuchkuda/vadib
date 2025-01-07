@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
 import PrivateRoute from "./private_route";
-import PopulateeRoute from "./populate_route";
+import PopulateRoute from "./populate_route";
 import { Route, Navigate } from 'react-router-dom';
 
 import Dashboard from "../page/dashboard/Dashboard";
@@ -15,6 +15,7 @@ import ForgotPass from "../page/authentication/ForgotPass";
 
 
 const route = () => {
+
   return (
     <>
       <Route exact path="/" element={<PrivateRoute/>}>
@@ -24,7 +25,7 @@ const route = () => {
         <Route exact path="/helpdesk" element={<HelpDesk/>}/>
         <Route exact path="/chatgpt" element={<Chatgpt/>}/>
       </Route>
-      <Route exact path="/" element={<PopulateeRoute/>}>
+      <Route exact path="/" element={<PopulateRoute/>}>
         <Route exact path="/signin" element={<Signin/>}/>
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/forgot-password" element={<ForgotPass/>}/>

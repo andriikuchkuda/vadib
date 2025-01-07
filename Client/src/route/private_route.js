@@ -3,8 +3,8 @@ import AuthContext from "../context/AuthContext";
 import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
-  const {token} = useContext(AuthContext);
-  
+  const {token, profile} = useContext(AuthContext);
+
   return token ? <Outlet/> : <Navigate to="/signin"/>
 
 }

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const { profile, setToken, setProfile} = useContext(AuthContext);
-
+  
   const logoutHandler = () => {
     localStorage.removeItem("authToken");
     setToken(false);
@@ -19,7 +19,7 @@ const Dashboard = () => {
           <div className="am-coll-content">
             <div className="am-widget" id="widget-member-main-subscriptions">
               <h2 id="member-main-subscriptions-head">Active Subscriptions</h2>
-              { profile.transaction ?
+              { profile.transaction || profile.role == 'admin' ?
                 (<div className="am-block" id="member-main-subscriptions">
                   <ul id="member-subscriptions" className="am-widget-list am-list-subscriptions">
                     <li data-search-target="subscription" data-title="chatgpt plus" id="product-item-87">
@@ -61,7 +61,7 @@ const Dashboard = () => {
                   )
               }
             </div>
-            {profile.transaction && (<div className="am-widget" id="widget-member-main-resources">
+            {profile.transaction || profile.role == 'admin' && (<div className="am-widget" id="widget-member-main-resources">
               <h2 id="member-main-resources-head">Active Resources</h2>
               <div className="am-block" id="member-main-resources">
                 <ul id="member-resources" className="am-widget-list am-list-resources">
