@@ -8,9 +8,10 @@ import AuthContext from '../../context/AuthContext';
 
 
 const Signin = () => {
-  const {setToken, setProfile} = useContext(AuthContext);
+  const { setToken, setProfile } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('')
 
   const navigate = useNavigate();
 
@@ -25,7 +26,7 @@ const Signin = () => {
       default:
         break;
     }
-  }, 200);  
+  }, 200);
 
   const onSubmitHandler = async e => {
     e.preventDefault();
@@ -39,18 +40,18 @@ const Signin = () => {
             password: password
           }
         )
-        const {message, data} = response;
-        
+        const { message, data } = response;
+
         localStorage.setItem('authToken', data.token);
         setToken(data.token);
         setProfile(data.profile);
         navigate('/dashboard');
       } else {
-        console.log('error')
+        setError("The user name or password is incorrect")
       }
 
     } catch (error) {
-      console.log('error')
+      setError(error.message);
     }
   }
 
@@ -58,6 +59,13 @@ const Signin = () => {
     <div className="am-body-content-content">
       <div className="am-login-form-wrapper">
         <div className="am-form am-auth-form am-login-form">
+          {
+            error && (
+              <ul className="am-errors am-login-errors">
+                <li>{error}</li>
+              </ul>
+            )
+          }
           <form onSubmit={onSubmitHandler} name="login" className="am-login-form-form">
             <fieldset>
               <legend>Login to your Account</legend>
@@ -69,11 +77,11 @@ const Signin = () => {
               </div>
               <div className="am-row am-row-login-login">
                 <div className="am-element-title">
-                  <label className="am-element-title" htmlFor="amember-login">Username/Email</label>
+                  <label className="am-element-title" htmlFor="amember-login">User Email</label>
                 </div>
                 <div className="am-element">
                   <input onChange={onChangeHandler} type="text" id="amember-login" name="email" size="15" defaultValue=""
-                    autoFocus="autofocus" placeholder="Username/Email" autoComplete="email" />
+                    autoFocus="autofocus" placeholder="User Email" autoComplete="email" />
                 </div>
               </div>
               <div className="am-row am-row-login-pass">
