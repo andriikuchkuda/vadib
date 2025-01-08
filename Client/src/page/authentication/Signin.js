@@ -12,6 +12,7 @@ const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('')
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -61,6 +62,10 @@ const Signin = () => {
     }
   }
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
   return (
     <div className="am-body-content-content">
       <div className="am-login-form-wrapper">
@@ -95,7 +100,7 @@ const Signin = () => {
                   <label className="am-element-title" htmlFor="amember-pass">Password</label>
                 </div>
                 <div className="am-element">
-                  <input onChange={onChangeHandler} type="password" id="amember-pass" name="password" className="am-pass-reveal" size="15" placeholder="Password" autoComplete="current-password" spellCheck="false" /><span className="am-switch-reveal am-switch-reveal-off" title="Toggle Password Visibility"></span>
+                  <input onChange={onChangeHandler} type={showPassword ? "text" : "password"} id="amember-pass" name="password" className="am-pass-reveal" size="15" placeholder="Password" autoComplete="current-password" spellCheck="false" /><span onClick={togglePasswordVisibility} className="am-switch-reveal am-switch-reveal-off" title="Toggle Password Visibility"></span>
                 </div>
               </div>
               <div className="am-row am-row-buttons">
