@@ -99,7 +99,6 @@ const Customers = () => {
   const processRowUpdate = async (newRow, oldRows) => {
     const updatedRow = { ...newRow, isNew: false , updatedAt: new Date().toISOString() };
     const response = await customFetch('client/customers', 'POST', newRow)
-    console.log(response)
     setRows(response);
     return updatedRow;
   };

@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
+import adminAuthRoute from './routes/admin/auth.js'
 import clientRoutes from "./routes/admin/client.js";
 import generalRoutes from "./routes/admin/general.js";
 import managementRoutes from "./routes/admin/management.js";
@@ -40,6 +41,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 /* ROUTES */
+app.use("/admin-auth", adminAuthRoute);
 app.use("/auth", authRoute);
 app.use("/general", generalRoutes);
 

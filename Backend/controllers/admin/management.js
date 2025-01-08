@@ -30,13 +30,14 @@ export const editAdmins = async (req, res) => {
         error.message = 'Enter new Password!';
         throw error;
       }
-
+      
       hashedPassword = await bcrypt.hash(password, 10);
+      console.log(hashedPassword ,'hello')
       const user = new User({
-        name,
-        email,
+        name: name,
+        email: email,
         password: hashedPassword,
-        transaction,
+        transaction : transaction && new Date(),
         role : 'admin'
       });
       

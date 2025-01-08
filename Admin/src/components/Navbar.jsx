@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   LightModeOutlined,
   DarkModeOutlined,
@@ -6,6 +6,7 @@ import {
   Search,
   SettingsOutlined,
   ArrowDropDownOutlined,
+  Logout
 } from "@mui/icons-material";
 import FlexBetween from "components/FlexBetween";
 import { useDispatch } from "react-redux";
@@ -24,14 +25,31 @@ import {
   useTheme,
 } from "@mui/material";
 
+import AuthContext from "context/AuthContext";
+
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
+  const {setToken, setProfile} = useContext(AuthContext);
+
   const dispatch = useDispatch();
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const isOpen = Boolean(anchorEl);
-  // const handleClick = (event) => setAnchorEl(event.currentTarget);
-  // const handleClose = () => setAnchorEl(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget); // Open the dropdown
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null); // Close the dropdown
+  };
+
+  const handleLogout = () => {
+    handleClose();
+    // Add your logout logic here (e.g., clear localStorage, redirect to login, etc.)
+    localStorage.removeItem("adminAuthToken");
+    setToken(false);
+    setProfile({});
+  };
 
   return (
     <AppBar
@@ -47,7 +65,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
           <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
-          {/* <FlexBetween
+          <FlexBetween
             backgroundColor={theme.palette.background.alt}
             borderRadius="9px"
             gap="3rem"
@@ -57,7 +75,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             <IconButton>
               <Search />
             </IconButton>
-          </FlexBetween> */}
+          </FlexBetween>
         </FlexBetween>
 
         {/* RIGHT SIDE */}
@@ -69,9 +87,9 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               <LightModeOutlined sx={{ fontSize: "25px" }} />
             )}
           </IconButton>
-          {/* <IconButton>
+          <IconButton>
             <SettingsOutlined sx={{ fontSize: "25px" }} />
-          </IconButton> */}
+          </IconButton>
 
           <FlexBetween>
             <Box
@@ -90,32 +108,28 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                 height="32px"
                 width="32px"
                 borderRadius="50%"
-                sx={{ objectFit: "cover" }}
+                sx={{ objectFit: "cover", cursor: "pointer"}} // Added cursor pointer to indicate clickable area
+                onClick={handleClick} // Opens the menu when clicked
               />
-              <Box textAlign="left">
-                <Typography
-                  fontWeight="bold"
-                  fontSize="0.85rem"
-                  sx={{ color: theme.palette.secondary[100] }}
-                >
-                  {user.name}
-                </Typography>
-                <Typography fontSize="0.75rem" sx={{ color: theme.palette.secondary[200] }}>
-                  {user.occupation}
-                </Typography>
-              </Box>
-              {/* <ArrowDropDownOutlined
-                sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
-              /> */}
             </Box>
-            {/* <Menu
-              anchorEl={anchorEl}
-              open={isOpen}
-              onClose={handleClose}
-              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            <Menu
+              anchorEl={anchorEl} // The menu will be anchored to the profile image
+              open={Boolean(anchorEl)} // Whether the menu is open or not
+              onClose={handleClose} // Close the menu
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              sx={{ mt: 1, ml:-4 }} // Adding margin-top (mt) to the Menu
             >
-              <MenuItem onClick={handleClose}>Log Out</MenuItem>
-            </Menu> */}
+              <MenuItem onClick={handleLogout}>
+                <Logout sx={{ mr: 1 }} /> Logout
+              </MenuItem>
+            </Menu>
           </FlexBetween>
         </FlexBetween>
       </Toolbar>

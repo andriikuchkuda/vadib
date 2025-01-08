@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 
 import fetchWithAuth from '../../utils/fetch';
 import debounce from 'debounce';
@@ -14,6 +14,12 @@ const Signin = () => {
   const [error, setError] = useState('')
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setError('')
+    }, 2000);
+  },[error])
 
   const onChangeHandler = debounce(e => {
     switch (e.target.name) {
