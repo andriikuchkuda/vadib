@@ -8,12 +8,12 @@ const JWT_SECRET = "your_jwt_secret_key"; // Replace with a strong secret key
 
 export const login = async (req, res) => {
   const { email, password} = req.body;
-
   try {
     const existUser = await User.findOne({
       email,
       role : 'admin'
     });
+    console.log(email, password, existUser,'Hello world!!!')
     
     if(!existUser){
       return res.status(401).json({
