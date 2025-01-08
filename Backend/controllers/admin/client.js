@@ -37,8 +37,8 @@ export const getCustomers = async (req, res) => {
 };
 
 export const editCustomers = async (req, res) => {
-  const {name, email, transaction, role, isNew} = req.body;
-
+  const {_id, name, email, transaction, role } = req.body;
+console.log(email,'q123')
   try {
     if(!name || !email ) {
       const error = new Error();
@@ -51,7 +51,7 @@ export const editCustomers = async (req, res) => {
     }
 
     const customer = await User.findOneAndUpdate(
-      { email : email},
+      { _id },
       update,
       { new : true,
         upsert : true

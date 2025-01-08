@@ -19,12 +19,15 @@ import CancelIcon from '@mui/icons-material/Close';
 
 import customFetch from "utils/customFetch";
 
+const generateId = () => {
+  return [...Array(24)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+}
 
 const EditToolbar = (props) => {
   const { setRows, setRowModesModel } = props;
 
   const handleClick = () => {
-    const id = Date.now();
+    const id = generateId();
     setRows((oldRows) => [
       ...oldRows,
       { _id : id, name: '', email: '', transaction: '', role: '', isNew: true },
@@ -119,13 +122,15 @@ const Customers = () => {
       type : "date",
       headerName: "Transaction",
       flex: 1,
-      editable: true
+      editable: true,
+      valueGetter: (params) => {
+        return new Date(params); 
+      }
     },
     {
       field: "role",
       headerName: "Role",
-      flex: 0.5,
-      editable: true
+      flex: 0.5
     },
     {
       field: "actions",
@@ -216,12 +221,12 @@ const Customers = () => {
           onRowModesModelChange={handleRowModesModelChange}
           onRowEditStop={handleRowEditStop}
           processRowUpdate={processRowUpdate}
-          slots={{ 
-            toolbar: EditToolbar
-           }}
-          slotProps={{
-            toolbar: { setRows, setRowModesModel },
-          }}
+          // slots={{ 
+          //   toolbar: EditToolbar
+          //  }}
+          // slotProps={{
+          //   toolbar: { setRows, setRowModesModel },
+          // }}
         />
       </Box>
     </Box>

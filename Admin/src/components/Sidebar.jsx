@@ -50,10 +50,10 @@ const navItems = [
     text: "Customers",
     icon: <Groups2Outlined />,
   },
-  {
-    text: "Transactions",
-    icon: <ReceiptLongOutlined />,
-  },
+  // {
+  //   text: "Transactions",
+  //   icon: <ReceiptLongOutlined />,
+  // },
   // {
   //   text: "Geography",
   //   icon: <PublicOutlined />,

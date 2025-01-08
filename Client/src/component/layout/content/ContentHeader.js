@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import AuthContext from '../../../context/AuthContext';
 
-export default function ContentHeader() {
+const ContentHeader = () => {
+  const [subTitle, setSubTitle] = useState('');
   const {pathname} = useLocation();
   const {token, profile, setToken, setProfile} = useContext(AuthContext);
 
@@ -13,7 +14,26 @@ export default function ContentHeader() {
     setProfile({});
   }
 
+  useEffect(() => {
+    switch (pathname) {
+      case "/dashboard":
+        setSubTitle('Your Membership Information');
+        break;
+      case "/profile":
+        setSubTitle('Customer Profile');
+        break;
+      case "/shopcart":
+        setSubTitle('Shopping Cart');
+        break;
+      case "/helpdesk":
+        setSubTitle('');
+        break;
+      default:
+        break;
+    }
+  }, [pathname])
 
+  
   return (
     <div className="am-body-content-top">
       {
@@ -47,10 +67,12 @@ export default function ContentHeader() {
                 </li>
               </ul>
             </div>
-            <h1>Your Membership Information</h1>
+            <h1>{subTitle}</h1>
           </>
         )
       }
     </div>
   )
 }
+
+export default ContentHeader;

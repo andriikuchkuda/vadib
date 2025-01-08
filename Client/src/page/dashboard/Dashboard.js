@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 
+import transformDate from '../../utils/transformDate';
+
 const Dashboard = () => {
   const { profile, setToken, setProfile} = useContext(AuthContext);
   
@@ -19,16 +21,15 @@ const Dashboard = () => {
           <div className="am-coll-content">
             <div className="am-widget" id="widget-member-main-subscriptions">
               <h2 id="member-main-subscriptions-head">Active Subscriptions</h2>
-              { profile.transaction || profile.role == 'admin' ?
+              { profile.transaction && (new Date(profile.transaction) > new Date()) ?
                 (<div className="am-block" id="member-main-subscriptions">
                   <ul id="member-subscriptions" className="am-widget-list am-list-subscriptions">
                     <li data-search-target="subscription" data-title="chatgpt plus" id="product-item-87">
                       <span className="am-list-subscriptions-title">
                         <strong>ChatGPT Plus</strong>
                       </span><span className="am-list-subscriptions-date">
-                        <span className="am-list-subscriptions-date_expires">expires <span
-                          className="am-list-subscriptions-date_expires_date" data-date="2025-01-13">13 Jan
-                          2025</span></span>
+                        <span className="am-list-subscriptions-date_expires"> expires <span
+                          className="am-list-subscriptions-date_expires_date" data-date="2025-01-13">{transformDate(profile.transaction)}</span></span>
                       </span><span className="am-list-subscriptions-link">
                       </span>
                       <div className="am-list-subscriptions-desc"></div>
@@ -61,7 +62,7 @@ const Dashboard = () => {
                   )
               }
             </div>
-            {profile.transaction || profile.role == 'admin' && (<div className="am-widget" id="widget-member-main-resources">
+            {(profile.transaction && (new Date(profile.transaction) > new Date())) &&  (<div className="am-widget" id="widget-member-main-resources">
               <h2 id="member-main-resources-head">Active Resources</h2>
               <div className="am-block" id="member-main-resources">
                 <ul id="member-resources" className="am-widget-list am-list-resources">
@@ -69,12 +70,12 @@ const Dashboard = () => {
                     id="resource-link-page-152-wrapper">
                     <Link to="/chatgpt"
                       className="am-resource-page" id="resource-link-page-152" title="ChatGPT NEW">ChatGPT NEW</Link>
-                    <div className="am-list-resources-desc">ChatGpt by NoxTools</div>
+                    <div className="am-list-resources-desc">ChatGpt by Vadib</div>
                   </li>
                   <li data-search-target="resources-link" data-title="you ai" id="resource-link-page-167-wrapper">
                     <a href="/secure/page/youai" className="am-resource-page" id="resource-link-page-167"
                       title="You Ai">You Ai</a>
-                    <div className="am-list-resources-desc">Youai by NoxTools</div>
+                    <div className="am-list-resources-desc">Youai by Vadib</div>
                   </li>
                 </ul>
               </div>
