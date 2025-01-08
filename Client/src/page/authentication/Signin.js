@@ -88,11 +88,11 @@ const Signin = () => {
               </div>
               <div className="am-row am-row-login-login">
                 <div className="am-element-title">
-                  <label className="am-element-title" htmlFor="amember-login">User Email</label>
+                  <label className="am-element-title" htmlFor="amember-login">Email</label>
                 </div>
                 <div className="am-element">
                   <input onChange={onChangeHandler} type="text" id="amember-login" name="email" size="15" defaultValue=""
-                    autoFocus="autofocus" placeholder="User Email" autoComplete="email" />
+                    autoFocus="autofocus" placeholder="Email" autoComplete="email" />
                 </div>
               </div>
               <div className="am-row am-row-login-pass">
@@ -100,7 +100,8 @@ const Signin = () => {
                   <label className="am-element-title" htmlFor="amember-pass">Password</label>
                 </div>
                 <div className="am-element">
-                  <input onChange={onChangeHandler} type={showPassword ? "text" : "password"} id="amember-pass" name="password" className="am-pass-reveal" size="15" placeholder="Password" autoComplete="current-password" spellCheck="false" /><span onClick={togglePasswordVisibility} className="am-switch-reveal am-switch-reveal-off" title="Toggle Password Visibility"></span>
+                  <input onChange={onChangeHandler} type={showPassword ? "text" : "password"} id="amember-pass" name="password" className="am-pass-reveal" size="15" placeholder="Password" autoComplete="current-password" spellCheck="false" />
+                  <span onClick={togglePasswordVisibility} className={`am-switch-reveal am-switch-reveal-${showPassword ? 'on':'off'}`} title="Toggle Password Visibility"></span>
                 </div>
               </div>
               <div className="am-row am-row-buttons">
