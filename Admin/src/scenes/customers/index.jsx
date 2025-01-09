@@ -70,8 +70,9 @@ const Customers = () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
   };
 
-  const handleDeleteClick = (id) => () => {
-    setRows(rows.filter((row) => row._id !== id));
+  const handleDeleteClick = (id) => async () => {
+    const response = await customFetch(`client/customers/${id}`, 'DELETE');
+    setRows(response);  
   };
 
   const handleCancelClick = (id) => () => {

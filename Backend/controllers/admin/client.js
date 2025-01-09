@@ -36,9 +36,30 @@ export const getCustomers = async (req, res) => {
   }
 };
 
+export const deleteCustomers = async (req, res) => {
+  const id = req.params.id;
+  
+  try {
+    const isExistDeletedUser = await User.findOneAndDelete({
+      id 
+    });
+    console.log(isExistDeletedUser, 'hello world12345')
+    if(!isExistDeletedUser) {
+      const error = new Error();
+      error.message = 'Not exist User!';
+      throw error;
+    }
+    
+    const customers = await User.find({ role: "user" }).select("-password");
+
+    res.status(200).json(customers);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
 export const editCustomers = async (req, res) => {
   const {_id, name, email, transaction, role } = req.body;
-console.log(email,'q123')
+
   try {
     if(!name || !email ) {
       const error = new Error();

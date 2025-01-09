@@ -69,6 +69,26 @@ export const editAdmins = async (req, res) => {
   }
 };
 
+export const deleteAdmins = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const isExistDeletedUser = await User.findOneAndDelete({
+      id 
+    })
+
+    if(!isExistDeletedUser) {
+      const error = new Error();
+      error.message = 'Not exist User!';
+      throw error;
+    }
+    const admins = await User.find({ role: "admin" });
+
+    res.status(200).json(admins);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
 export const getUserPerformance = async (req, res) => {
   try {
     const { id } = req.params;

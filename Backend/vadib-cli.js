@@ -29,6 +29,14 @@ program
 
     // Generate initial admin credentials
     const adminEmail = 'admin@vadib.com';
+
+    const isExistSuperAdmin = await User.findOne({
+      email : adminEmail
+    })
+
+    if(isExistSuperAdmin) {
+      return console.log('You have already created Super Admin!')
+    }
     const adminPassword = generateRandomPassword();
 
     const hashedPassword = await bcrypt.hash(adminPassword, 10);

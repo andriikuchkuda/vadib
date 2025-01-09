@@ -70,8 +70,9 @@ const Admin = () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
   };
 
-  const handleDeleteClick = (id) => () => {
-    setRows(rows.filter((row) => row._id !== id));
+  const handleDeleteClick =  (id) => async () => {
+    const response = await customFetch(`management/admins/${id}`, 'DELETE')
+    setRows(response);
   };
 
   const handleCancelClick = (id) => () => {
