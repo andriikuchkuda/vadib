@@ -12,7 +12,7 @@ const Dashboard = () => {
     setToken(false);
     setProfile({});
   }
-
+  
   return (
     <div className="am-body-content-content">
       <div className="am-layout-two-coll">
@@ -21,7 +21,7 @@ const Dashboard = () => {
           <div className="am-coll-content">
             <div className="am-widget" id="widget-member-main-subscriptions">
               <h2 id="member-main-subscriptions-head">Active Subscriptions</h2>
-              { profile.transaction && (new Date(profile.transaction) > new Date()) ?
+              { profile.transaction && (new Date(profile.transaction.usePeriod) > new Date()) ?
                 (<div className="am-block" id="member-main-subscriptions">
                   <ul id="member-subscriptions" className="am-widget-list am-list-subscriptions">
                     <li data-search-target="subscription" data-title="chatgpt plus" id="product-item-87">
@@ -29,7 +29,7 @@ const Dashboard = () => {
                         <strong>ChatGPT Plus</strong>
                       </span><span className="am-list-subscriptions-date">
                         <span className="am-list-subscriptions-date_expires"> expires <span
-                          className="am-list-subscriptions-date_expires_date" data-date="2025-01-13">{transformDate(profile.transaction)}</span></span>
+                          className="am-list-subscriptions-date_expires_date" data-date="2025-01-13">{transformDate(profile.transaction.usePeriod)}</span></span>
                       </span><span className="am-list-subscriptions-link">
                       </span>
                       <div className="am-list-subscriptions-desc"></div>
@@ -62,7 +62,7 @@ const Dashboard = () => {
                   )
               }
             </div>
-            {(profile.transaction && (new Date(profile.transaction) > new Date())) &&  (<div className="am-widget" id="widget-member-main-resources">
+            {(profile.transaction && (new Date(profile.transaction.usePeriod) > new Date())) &&  (<div className="am-widget" id="widget-member-main-resources">
               <h2 id="member-main-resources-head">Active Resources</h2>
               <div className="am-block" id="member-main-resources">
                 <ul id="member-resources" className="am-widget-list am-list-resources">
@@ -71,11 +71,6 @@ const Dashboard = () => {
                     <Link to="/chatgpt"
                       className="am-resource-page" id="resource-link-page-152" title="ChatGPT NEW">ChatGPT NEW</Link>
                     <div className="am-list-resources-desc">ChatGpt by Vadib</div>
-                  </li>
-                  <li data-search-target="resources-link" data-title="you ai" id="resource-link-page-167-wrapper">
-                    <a href="/secure/page/youai" className="am-resource-page" id="resource-link-page-167"
-                      title="You Ai">You Ai</a>
-                    <div className="am-list-resources-desc">Youai by Vadib</div>
                   </li>
                 </ul>
               </div>
@@ -93,12 +88,6 @@ const Dashboard = () => {
                   </li>
                   <li>
                     <Link to="/profile">Change Password/Edit Profile</Link>
-                  </li>
-                  <li>
-                    <a href="/secure/member/payment-history">Payments History</a>
-                  </li>
-                  <li>
-                    <a href="/secure/aff/aff/enable-aff">Advertise our website to your friends and earn money</a>
                   </li>
                 </ul>
               </div>

@@ -22,9 +22,6 @@ const ContentHeader = () => {
       case "/profile":
         setSubTitle('Customer Profile');
         break;
-      case "/shopcart":
-        setSubTitle('Shopping Cart');
-        break;
       case "/helpdesk":
         setSubTitle('');
         break;
@@ -58,9 +55,6 @@ const ContentHeader = () => {
                 </li>
                 <li className={pathname == "/profile" ? "active" : "normal"}>
                   <Link id="menu-profile-default" to="/profile">Customer Profile</Link>
-                </li>
-                <li className={pathname == "/shopcart" ? "active" : "normal"}>
-                  <Link id="menu-custom-link-13141761" to="/shopcart">Shopping Cart</Link>
                 </li>
                 <li className={pathname == "/helpdesk" ? "active" : "normal"}>
                   <Link id="menu-helpdesk" to="/helpdesk">Helpdesk</Link>

@@ -5,7 +5,6 @@ import { Route, Navigate } from 'react-router-dom';
 
 import Dashboard from "../page/dashboard/Dashboard";
 import Profile from "../page/profile/Profile";
-import ShopCart from "../page/shopcart/ShopCart";
 import HelpDesk from "../page/helpdesk/HelpDesk";
 import Chatgpt from "../page/chatgpt/Chatgpt";
 
@@ -21,7 +20,6 @@ const route = () => {
       <Route exact path="/" element={<PrivateRoute/>}>
         <Route exact path="/dashboard" element={<Dashboard/>}/>
         <Route exact path="/profile" element={<Profile/>}/>
-        <Route exact path="/shopcart" element={<ShopCart/>}/>
         <Route exact path="/helpdesk" element={<HelpDesk/>}/>
         <Route exact path="/chatgpt" element={<Chatgpt/>}/>
       </Route>

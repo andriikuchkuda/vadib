@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import FlexBetween from "components/FlexBetween";
 import Header from "components/Header";
 import { DownloadOutlined, Email, PointOfSale, PersonAdd, Traffic } from "@mui/icons-material";
@@ -7,45 +7,84 @@ import { DataGrid } from "@mui/x-data-grid";
 import reportUrl from "assets/Report.xlsx";
 import BreakdownChart from "components/BreakdownChart";
 import OverviewChart from "components/OverviewChart";
-import { useGetDashboardQuery } from "state/api";
 import StatBox from "components/StatBox";
 
+import customFetch from "utils/customFetch";
+
 const Dashboard = () => {
+  const [data, setData] = useState({
+    totalCustomerStats : {
+      counts : 0,
+      increase : 0
+    },
+    thisTodayTotalSaleStats : {
+      counts : 0,
+      increase : 0
+    },
+    thisMonthTotalSaleStats : {
+      counts : 0,
+      increase : 0
+    },
+    thisYearTotalSaleStats : {
+      counts : 0,
+      increase : 0
+    },
+    transactions : [],
+  })
+  
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
-  const { data, isLoading } = useGetDashboardQuery();
-
+  
+  useEffect(() => {
+    const initFetch = async () => {
+      try{
+        const response = await customFetch('general/dashboard');
+        setData(response);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    initFetch();
+  }, [])
+  
   const columns = [
     {
-      field: "_id",
-      headerName: "ID",
-      flex: 1,
+      field: "name",
+      headerName: "Name",
+      flex: 0.7
     },
     {
-      field: "userId",
-      headerName: "User ID",
+      field: "email",
+      headerName: "Email",
+      flex: 0.7,
+      sortable: false
+    },
+    {
+      field: "transaction",
+      headerName: "Transaction",
       flex: 1,
+      valueGetter: (params) => {
+        const inputDate = new Date(params.usePeriod);
+
+        // Extract the date part in 'YYYY-MM-DD' format
+        const formattedDate = inputDate.toISOString().split('T')[0];
+        return  formattedDate;
+      }
     },
     {
       field: "createdAt",
       headerName: "CreatedAt",
       flex: 1,
-    },
-    {
-      field: "products",
-      headerName: "# of Products",
-      flex: 0.5,
-      sortable: false,
-      renderCell: (params) => params.value.length,
-    },
-    {
-      field: "cost",
-      headerName: "Cost",
-      flex: 1,
-      renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
+      valueGetter: (params) => {
+        const inputDate = new Date(params);
+
+        // Extract the date part in 'YYYY-MM-DD' format
+        const formattedDate = inputDate.toISOString().split('T')[0];
+        return  formattedDate;
+      }
     },
   ];
-
+  
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
@@ -88,19 +127,17 @@ const Dashboard = () => {
         {/* ROW 1 */}
         <StatBox
           title="Total Customers"
-          value={data && data.totalCustomers}
-          increase="+14%"
-          description="Since last month"
+          value={data && data.totalCustomerStats.counts}
           icon={<Email sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
         />
         <StatBox
           title="Sales Today"
-          value={data && data.todayStats.totalSales}
-          increase="+21%"
-          description="Since last month"
+          value={data && data.thisTodayTotalSaleStats.counts}
+          increase={data && data.thisTodayTotalSaleStats.increase + "%"}
+          description="Since yesterday"
           icon={<PointOfSale sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
         />
-        <Box
+        {/* <Box
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
@@ -108,30 +145,30 @@ const Dashboard = () => {
           borderRadius="0.55rem"
         >
           <OverviewChart view="sales" isDashboard={true} />
-        </Box>
+        </Box> */}
         <StatBox
           title="Monthly Sales"
-          value={data && data.thisMonthStats.totalSales}
-          increase="+5%"
+          value={data && data.thisMonthTotalSaleStats.counts}
+          increase={data && data.thisMonthTotalSaleStats.increase + "%"}
           description="Since last month"
           icon={<PersonAdd sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
         />
         <StatBox
           title="Yearly Sales"
-          value={data && data.yearlySalesTotal}
-          increase="+43%"
-          description="Since last month"
+          value={data && data.thisYearTotalSaleStats.counts}
+          increase={data && data.thisYearTotalSaleStats.increase + "%"}
+          description="Since last year"
           icon={<Traffic sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
         />
 
         {/* ROW 2 */}
         <Box
-          gridColumn="span 8"
+          gridColumn="span 12"
           gridRow="span 3"
           sx={{
             "& .MuiDataGrid-root": {
               border: "none",
-              borderRadius: "5rem",
+              borderRadius: "0.2rem",
             },
             "& .MuiDataGrid-cell": {
               borderBottom: "none",
@@ -155,13 +192,13 @@ const Dashboard = () => {
           }}
         >
           <DataGrid
-            loading={isLoading || !data}
+            // loading={isLoading || !data}
             getRowId={(row) => row._id}
             rows={(data && data.transactions) || []}
             columns={columns}
           />
         </Box>
-        <Box
+        {/* <Box
           gridColumn="span 4"
           gridRow="span 3"
           backgroundColor={theme.palette.background.alt}
@@ -176,7 +213,7 @@ const Dashboard = () => {
             Breakdown of real states and information via category for revenue made for this year and
             total sales.
           </Typography>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

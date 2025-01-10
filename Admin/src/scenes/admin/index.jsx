@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Box, useTheme } from "@mui/material";
-import { useGetCustomersQuery, useGetAdminsQuery } from "state/api";
+import React, { useState, useEffect, useContext } from "react";
+import { Box, useTheme, Select, MenuItem } from "@mui/material";
 import Header from "components/Header";
 import {
   GridRowModes,
@@ -18,6 +17,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
 
 import customFetch from "utils/customFetch";
+import AuthContext from "context/AuthContext";
 
 const generateId = () => {
   return [...Array(24)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
@@ -41,7 +41,7 @@ const EditToolbar = (props) => {
   return (
     <GridToolbarContainer>
       <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
+        Add admin
       </Button>
     </GridToolbarContainer>
   );
@@ -50,15 +50,22 @@ const EditToolbar = (props) => {
 
 const Admin = () => {
   const theme = useTheme();
-  const {data, isLoading} = useGetAdminsQuery();
 
   const [rows, setRows] = useState([]);
-
+  const [hasEditPermission, setHasEditpermission] = useState(false);
+  const {profile} = useContext(AuthContext);
+  
   useEffect(() => {
-    if(!isLoading) {
-      setRows(data)
+    const initFetch = async () => {
+      const response = await customFetch('management/admins');
+      setRows(response);
     }
-  },[isLoading])
+    initFetch();
+
+    if(profile.role == "superadmin"){
+      setHasEditpermission(true);
+    }
+  },[profile])
 
   const [rowModesModel, setRowModesModel] = useState({});
   
@@ -96,7 +103,13 @@ const Admin = () => {
       event.defaultMuiPrevented = true;
     }
   };
-  
+
+  const handleRoleChange = (id, newRole) => {
+    setRows((prevRows) =>
+      prevRows.map((row) => (row.id === id ? { ...row, role: newRole } : row))
+    );
+  };
+
   const processRowUpdate = async (newRow, oldRows) => {
     const updatedRow = { ...newRow, updatedAt: new Date().toISOString() };
 
@@ -110,19 +123,19 @@ const Admin = () => {
       field: "name",
       headerName: "Name",
       flex: 0.8,
-      editable: true
+      editable: hasEditPermission ? true : false
     },
     {
       field: "email",
       headerName: "Email",
-      flex: 1,
-      editable: true
+      flex: 0.8,
+      editable: hasEditPermission ? true : false
     },
     {
       field: "password",
       headerName: "Password",
-      flex: 1,
-      editable: true,
+      flex: 0.6,
+      editable: hasEditPermission ? true : false,
       renderCell: (params) => {
         return <span>{params.row.isNew ? "" : "********"}</span>
       },
@@ -151,21 +164,39 @@ const Admin = () => {
         </div>
       ),
     },    
-    {
-      field: "transaction",
-      type : "date",
-      headerName: "Transaction",
-      flex: 0.5,
-      editable: true,
-      valueGetter: (params) => {
-        return new Date(params); 
-      }
-    },
+    // {
+    //   field: "transaction",
+    //   type : "date",
+    //   headerName: "Transaction",
+    //   flex: 0.5,
+    //   editable: true,
+    //   valueGetter: (params) => {
+    //     return new Date(params); 
+    //   }
+    // },
     {
       field: "role",
       headerName: "Role",
-      flex: 0.3,
-      editable: true
+      flex: 0.6,
+      editable: hasEditPermission ? true : false,
+      renderEditCell: (params) => {
+        return (
+          <Select
+            value={params.value || ""}
+            onChange={(e) =>
+              params.api.setEditCellValue({
+                id: params.id,
+                field: params.field,
+                value: e.target.value,
+              })
+            }
+            fullWidth
+          >
+            <MenuItem value="admin">admin</MenuItem>
+            <MenuItem value="superadmin">superadmin</MenuItem>
+          </Select>
+        );
+      },
     },
     {
       field: "actions",
@@ -215,6 +246,10 @@ const Admin = () => {
     }
   ];
 
+  const columnVisibilityModel = {
+    actions: hasEditPermission
+  };
+
   return (
     <Box m="1.5rem 2.5rem">
       <Header title="ADMINS" subtitle="List of Admins" />
@@ -247,7 +282,7 @@ const Admin = () => {
         }}
       >
         <DataGrid
-          loading={isLoading || !rows}
+          // loading={isLoading || !rows}
           getRowId={(row) => row._id || row._id || row.key}
           rows={Array.isArray(rows) ? rows : []}
           columns={columns}
@@ -256,12 +291,13 @@ const Admin = () => {
           onRowModesModelChange={handleRowModesModelChange}
           onRowEditStop={handleRowEditStop}
           processRowUpdate={processRowUpdate}
-          slots={{ 
+          slots={hasEditPermission ? { 
             toolbar: EditToolbar
-           }}
-          slotProps={{
+           } : null}
+          slotProps={hasEditPermission ? {
             toolbar: { setRows, setRowModesModel },
-          }}
+          } : null}
+          columnVisibilityModel={columnVisibilityModel}  // Use the visibility model
         />
       </Box>
     </Box>

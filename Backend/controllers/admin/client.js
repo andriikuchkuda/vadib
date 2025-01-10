@@ -3,6 +3,7 @@ import ProductStat from "../../models/ProductStat.js";
 import User from "../../models/User.js";
 import Transaction from "../../models/Transaction.js";
 import getCountryIso3 from "country-iso-2-to-3";
+import bcrypt from "bcrypt";
 
 export const getProducts = async (req, res) => {
   try {
@@ -28,7 +29,7 @@ export const getProducts = async (req, res) => {
 
 export const getCustomers = async (req, res) => {
   try {
-    const customers = await User.find({ role: "user" }).select("-password");
+    const customers = await User.find({ role: "user" }).populate("transaction").select("-password");
 
     res.status(200).json(customers);
   } catch (error) {
@@ -38,18 +39,24 @@ export const getCustomers = async (req, res) => {
 
 export const deleteCustomers = async (req, res) => {
   const id = req.params.id;
-  
+
   try {
     const isExistDeletedUser = await User.findOneAndDelete({
-      id 
+      _id : id
     });
-    console.log(isExistDeletedUser, 'hello world12345')
-    if(!isExistDeletedUser) {
+
+    if (isExistDeletedUser.transaction) {
+      const isExistDeletedTransaction = await Transaction.findOneAndDelete({
+        _id: isExistDeletedUser.transaction
+      });
+    }
+
+    if (!isExistDeletedUser) {
       const error = new Error();
       error.message = 'Not exist User!';
       throw error;
     }
-    
+
     const customers = await User.find({ role: "user" }).select("-password");
 
     res.status(200).json(customers);
@@ -57,30 +64,122 @@ export const deleteCustomers = async (req, res) => {
     res.json({ message: error.message });
   }
 };
-export const editCustomers = async (req, res) => {
-  const {_id, name, email, transaction, role } = req.body;
 
+export const editCustomers = async (req, res) => {
+  const { _id, name, email, transaction, password, role } = req.body;
+  let newTransaction = {}
   try {
-    if(!name || !email ) {
+    if (!name || !email) {
       const error = new Error();
       error.message = 'Must fill out name and email!';
       throw error;
     }
 
-    const update = {
-      $set : {name , email, transaction, role : role ? role : 'user'}
+    const isExistUser = await User.findById(_id);
+    let hashedPassword;
+
+    if (isExistUser) {
+      if (transaction) {
+        if (isExistUser.transaction) {
+          // Update existing transaction
+          newTransaction = await Transaction.findOneAndUpdate(
+            { _id: isExistUser.transaction },
+            {
+              $set: {
+                userId: isExistUser.id,
+                usePeriod: transaction
+              }
+            },
+            {
+              new: true
+            }
+          );
+        } else {
+          // Create new transaction
+          newTransaction = new Transaction({
+            userId: isExistUser.id,
+            usePeriod: transaction
+          });
+          await newTransaction.save();
+        }
+      } else {
+        if (isExistUser.transaction) {
+          const isExistDeletedTransaction = await Transaction.findOneAndDelete({
+            _id: isExistUser.transaction
+          });
+
+          isExistUser.transaction = null;
+          await isExistUser.save();
+        }
+      }
+
+      const isMatch = password == isExistUser.password;
+
+      if (password !== undefined && !isMatch) {
+        hashedPassword = await bcrypt.hash(password, 10);
+      }
+
+      const update = {
+        $set: {
+          name,
+          email,
+          password: hashedPassword ? hashedPassword : password,
+          transaction: newTransaction ? newTransaction._id : null,
+          role: role ? role : 'user'
+        }
+      }
+  
+      const customer = await User.findOneAndUpdate(
+        { _id },
+        update,
+        {
+          new: true,
+          upsert: true
+        }
+      );
+
+    } else {
+      hashedPassword = await bcrypt.hash(password, 10);
+
+      const user = new User({
+        name,
+        email,
+        password: hashedPassword,
+        role : 'user'
+      });
+      
+      const newUser = await user.save();
+
+      if (transaction) {
+          // Create new transaction
+        newTransaction = new Transaction({
+          userId: newUser.id,
+          usePeriod: transaction
+        });
+        await newTransaction.save();
+
+        const update = {
+          $set: {
+            name,
+            email,
+            transaction: newTransaction && newTransaction._id ? newTransaction._id : null,
+            role: role ? role : 'user'
+          }
+        }
+    
+        const customer = await User.findOneAndUpdate(
+          { _id : newUser.id },
+          update,
+          {
+            new: true,
+            upsert: true
+          }
+        );
+      }
     }
 
-    const customer = await User.findOneAndUpdate(
-      { _id },
-      update,
-      { new : true,
-        upsert : true
-      }
-    );
-
     
-    const customers = await User.find({ role: "user" }).select("-password");
+    const customers = await User.find({ role: "user" }).populate("transaction").select("-password");
 
     res.status(200).json(customers);
   } catch (error) {

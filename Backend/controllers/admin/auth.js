@@ -11,9 +11,8 @@ export const login = async (req, res) => {
   try {
     const existUser = await User.findOne({
       email,
-      role : 'admin'
+      role: { $in: ['admin', 'superadmin'] }
     });
-    console.log(email, password, existUser,'Hello world!!!')
     
     if(!existUser){
       return res.status(401).json({

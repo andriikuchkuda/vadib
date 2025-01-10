@@ -23,7 +23,7 @@ const SignIn = () => {
           email, password
         })
         const { message, data } = response;
-        console.log(data)
+        
         localStorage.setItem('adminAuthToken', data.token);
         setToken(data.token);
         setProfile(data.profile);

@@ -16,14 +16,6 @@ const App = () => {
   const [token, setToken] = useState(false);
   const [profile, setProfile] = useState({});
 
-  const getProfile = useCallback(async (id) => {
-    const response = await fetchWithAuth(
-      `/general/user/${id}`
-    );
-
-    return response;
-  },[token])
-
   useEffect(() => {
     const initializeAuth = async () => {
       try{

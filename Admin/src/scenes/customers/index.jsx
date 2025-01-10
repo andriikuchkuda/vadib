@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Box, useTheme } from "@mui/material";
-import { useGetCustomersQuery } from "state/api";
 import Header from "components/Header";
 import {
   GridRowModes,
@@ -30,7 +29,7 @@ const EditToolbar = (props) => {
     const id = generateId();
     setRows((oldRows) => [
       ...oldRows,
-      { _id : id, name: '', email: '', transaction: '', role: '', isNew: true },
+      { _id: id, name: '', email: '', transaction: '', role: '', isNew: true },
     ]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
@@ -41,7 +40,7 @@ const EditToolbar = (props) => {
   return (
     <GridToolbarContainer>
       <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
+        Add customer
       </Button>
     </GridToolbarContainer>
   );
@@ -50,18 +49,18 @@ const EditToolbar = (props) => {
 
 const Customers = () => {
   const theme = useTheme();
-  const { data, isLoading } = useGetCustomersQuery();
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    if(!isLoading) {
-      setRows(data)
+    const initFetch = async () => {
+      const response = await customFetch('client/customers');
+      setRows(response);
     }
-  },[isLoading])
-
+    initFetch();
+  }, [])
 
   const [rowModesModel, setRowModesModel] = useState({});
-  
+
   const handleEditClick = (id) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
   };
@@ -72,7 +71,7 @@ const Customers = () => {
 
   const handleDeleteClick = (id) => async () => {
     const response = await customFetch(`client/customers/${id}`, 'DELETE');
-    setRows(response);  
+    setRows(response);
   };
 
   const handleCancelClick = (id) => () => {
@@ -96,10 +95,11 @@ const Customers = () => {
       event.defaultMuiPrevented = true;
     }
   };
-  
+
   const processRowUpdate = async (newRow, oldRows) => {
-    const updatedRow = { ...newRow, isNew: false , updatedAt: new Date().toISOString() };
-    const response = await customFetch('client/customers', 'POST', newRow)
+    const updatedRow = { ...newRow, updatedAt: new Date().toISOString() };
+    const response = await customFetch('client/customers', 'POST', newRow);
+
     setRows(response);
     return updatedRow;
   };
@@ -118,19 +118,53 @@ const Customers = () => {
       editable: true
     },
     {
+      field: "password",
+      headerName: "Password",
+      flex: 0.6,
+      editable: true,
+      renderCell: (params) => {
+        return <span>{params.row.isNew ? "" : "********"}</span>
+      },
+      renderEditCell: (params) => (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+          }}
+        >
+          <input
+            type="password"
+            aria-invalid="false"
+            className="MuiInputBase-input css-znj6fr-MuiInputBase-input"
+            onChange={(e) => {
+              // Update the value dynamically when the user types
+              params.api.setEditCellValue({
+                id: params.id,
+                field: params.field,
+                value: e.target.value,
+              });
+            }}
+          />
+        </div>
+      ),
+    },
+    {
       field: "transaction",
-      type : "date",
+      type: "date",
       headerName: "Transaction",
       flex: 1,
       editable: true,
       valueGetter: (params) => {
-        return new Date(params); 
+        return params && new Date(params.usePeriod)
       }
     },
     {
       field: "role",
       headerName: "Role",
-      flex: 0.5
+      flex: 0.5,
+      sortable: false
     },
     {
       field: "actions",
@@ -212,7 +246,7 @@ const Customers = () => {
         }}
       >
         <DataGrid
-          loading={isLoading || !rows}
+          // loading={isLoading || !rows}
           getRowId={(row) => row._id || row._id || row.key}
           rows={Array.isArray(rows) ? rows : []}
           columns={columns}
@@ -221,12 +255,12 @@ const Customers = () => {
           onRowModesModelChange={handleRowModesModelChange}
           onRowEditStop={handleRowEditStop}
           processRowUpdate={processRowUpdate}
-          // slots={{ 
-          //   toolbar: EditToolbar
-          //  }}
-          // slotProps={{
-          //   toolbar: { setRows, setRowModesModel },
-          // }}
+          slots={{
+            toolbar: EditToolbar
+          }}
+          slotProps={{
+            toolbar: { setRows, setRowModesModel },
+          }}
         />
       </Box>
     </Box>

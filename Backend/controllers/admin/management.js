@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 
 export const getAdmins = async (req, res) => {
   try {
-    const admins = await User.find({ role: "admin" });
+    const admins = await User.find({  role: { $in: ['admin', 'superadmin'] } });
     res.status(200).json(admins);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -13,7 +13,8 @@ export const getAdmins = async (req, res) => {
 };
 
 export const editAdmins = async (req, res) => {
-  const {_id, name, email, password, transaction, role } = req.body;
+  const {_id, name, email, password, role } = req.body;
+
   try {
     if(!name || !email ) {
       const error = new Error();
@@ -32,12 +33,11 @@ export const editAdmins = async (req, res) => {
       }
       
       hashedPassword = await bcrypt.hash(password, 10);
-      console.log(hashedPassword ,'hello')
+      
       const user = new User({
         name: name,
         email: email,
         password: hashedPassword,
-        transaction : transaction && new Date(),
         role : 'admin'
       });
       
@@ -49,7 +49,7 @@ export const editAdmins = async (req, res) => {
       }
 
       const update = {
-        $set : {name , email, password: hashedPassword, transaction, role : role ? role : 'admin'}
+        $set : {name , email, password: hashedPassword, role : role ? role : 'admin'}
       }
   
       const updatedAdmin = await User.findOneAndUpdate(
@@ -61,7 +61,7 @@ export const editAdmins = async (req, res) => {
       );
     }
 
-    const admins = await User.find({ role: "admin" });
+    const admins = await User.find({  role: { $in: ['admin', 'superadmin'] } });
 
     res.status(200).json(admins);
   } catch (error) {
@@ -71,9 +71,10 @@ export const editAdmins = async (req, res) => {
 
 export const deleteAdmins = async (req, res) => {
   const id = req.params.id;
+  
   try {
     const isExistDeletedUser = await User.findOneAndDelete({
-      id 
+      _id : id 
     })
 
     if(!isExistDeletedUser) {
@@ -81,7 +82,7 @@ export const deleteAdmins = async (req, res) => {
       error.message = 'Not exist User!';
       throw error;
     }
-    const admins = await User.find({ role: "admin" });
+    const admins = await User.find({  role: { $in: ['admin', 'superadmin'] } });
 
     res.status(200).json(admins);
   } catch (error) {

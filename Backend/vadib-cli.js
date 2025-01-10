@@ -45,7 +45,7 @@ program
       name: 'Super Admin',
       email: adminEmail,
       password: hashedPassword,
-      role: 'admin'
+      role: 'superadmin'
     });
 
     await user.save();
