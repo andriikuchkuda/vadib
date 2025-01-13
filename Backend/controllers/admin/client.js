@@ -66,7 +66,7 @@ export const deleteCustomers = async (req, res) => {
 };
 
 export const editCustomers = async (req, res) => {
-  const { _id, name, email, transaction, password, role } = req.body;
+  const { _id, name, email, transaction, password, adminId } = req.body;
   let newTransaction = {}
   try {
     if (!name || !email) {
@@ -87,7 +87,8 @@ export const editCustomers = async (req, res) => {
             {
               $set: {
                 userId: isExistUser.id,
-                usePeriod: transaction
+                usePeriod: transaction,
+                adminId : adminId
               }
             },
             {
@@ -98,6 +99,7 @@ export const editCustomers = async (req, res) => {
           // Create new transaction
           newTransaction = new Transaction({
             userId: isExistUser.id,
+            adminId : adminId,
             usePeriod: transaction
           });
           await newTransaction.save();
@@ -114,21 +116,21 @@ export const editCustomers = async (req, res) => {
       }
 
       const isMatch = password == isExistUser.password;
-
+      
       if (password !== undefined && !isMatch) {
         hashedPassword = await bcrypt.hash(password, 10);
       }
-
+      
       const update = {
         $set: {
           name,
           email,
           password: hashedPassword ? hashedPassword : password,
           transaction: newTransaction ? newTransaction._id : null,
-          role: role ? role : 'user'
+          role: 'user'
         }
       }
-  
+
       const customer = await User.findOneAndUpdate(
         { _id },
         update,
@@ -154,19 +156,21 @@ export const editCustomers = async (req, res) => {
           // Create new transaction
         newTransaction = new Transaction({
           userId: newUser.id,
-          usePeriod: transaction
+          usePeriod: transaction,
+          adminId : adminId
         });
         await newTransaction.save();
+
 
         const update = {
           $set: {
             name,
             email,
             transaction: newTransaction && newTransaction._id ? newTransaction._id : null,
-            role: role ? role : 'user'
+            role: 'user'
           }
         }
-    
+
         const customer = await User.findOneAndUpdate(
           { _id : newUser.id },
           update,

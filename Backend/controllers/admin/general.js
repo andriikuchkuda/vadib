@@ -65,11 +65,14 @@ export const getDashboardStats = async (req, res) => {
     let thisYearTotalSaleStats = {};
     let transactions = [];
 
-    transactions = await User.find({
-      transaction : {$ne: null}
-    }).populate('transaction');
+    // transactions = await User.find({transaction : {$ne: null}})
+    //   .populate('transaction');
 
-    
+    transactions = await Transaction.find()
+      .populate('adminId', '-password')
+      .populate('userId', '-password');
+
+
     totalCustomerStats.counts = await User.find({role : 'user'}).count();
 
     const startOfToday = new Date();
@@ -180,7 +183,7 @@ export const getDashboardStats = async (req, res) => {
       thisTodayTotalSaleStats,
       thisMonthTotalSaleStats,
       thisYearTotalSaleStats,
-      transactions,
+      transactions
     });
   } catch (error) {
     res.status(404).json({ message: error.message });

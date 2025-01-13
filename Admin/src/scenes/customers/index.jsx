@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Box, useTheme } from "@mui/material";
 import Header from "components/Header";
 import {
@@ -17,6 +17,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
 
 import customFetch from "utils/customFetch";
+import AuthContext from "context/AuthContext";
 
 const generateId = () => {
   return [...Array(24)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
@@ -50,7 +51,8 @@ const EditToolbar = (props) => {
 const Customers = () => {
   const theme = useTheme();
   const [rows, setRows] = useState([]);
-
+  const {profile} = useContext(AuthContext)
+  
   useEffect(() => {
     const initFetch = async () => {
       const response = await customFetch('client/customers');
@@ -97,8 +99,9 @@ const Customers = () => {
   };
 
   const processRowUpdate = async (newRow, oldRows) => {
-    const updatedRow = { ...newRow, updatedAt: new Date().toISOString() };
-    const response = await customFetch('client/customers', 'POST', newRow);
+    const updatedRow = { ...newRow, adminId : profile._id, updatedAt: new Date().toISOString() };
+
+    const response = await customFetch('client/customers', 'POST', updatedRow);
 
     setRows(response);
     return updatedRow;

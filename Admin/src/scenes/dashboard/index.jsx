@@ -46,25 +46,31 @@ const Dashboard = () => {
     }
     initFetch();
   }, [])
-  
+
   const columns = [
     {
-      field: "name",
-      headerName: "Name",
-      flex: 0.7
-    },
-    {
-      field: "email",
-      headerName: "Email",
+      field: "userId",
+      headerName: "Customer Name",
       flex: 0.7,
-      sortable: false
+      valueGetter: (params) => {
+        return  params.name;
+      }
     },
     {
-      field: "transaction",
-      headerName: "Transaction",
+      field: "adminId",
+      headerName: "Admin Name",
+      flex: 0.7,
+      sortable: false,
+      valueGetter: (params) => {
+        return  params.name;
+      }
+    },
+    {
+      field: "usePeriod",
+      headerName: "Period of Use",
       flex: 1,
       valueGetter: (params) => {
-        const inputDate = new Date(params.usePeriod);
+        const inputDate = new Date(params);
 
         // Extract the date part in 'YYYY-MM-DD' format
         const formattedDate = inputDate.toISOString().split('T')[0];
