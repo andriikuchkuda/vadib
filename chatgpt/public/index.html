@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+  <title>React App</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.oaistatic.com/assets/apple-touch-icon-mz9nytnj.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.oaistatic.com/assets/favicon-32x32-p4ktpm1x.webp"
+    media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32"
+    href="https://cdn.oaistatic.com/assets/favicon-dark-32x32-gt5kfzyp.webp" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/svg+xml" sizes="32x32" href="https://cdn.oaistatic.com/assets/favicon-o20kmmos.svg">
+
+  <link rel="stylesheet" href="https://cdn.oaistatic.com/assets/root-lnj75i4b.css">
+  <link rel="stylesheet" href="https://cdn.oaistatic.com/assets/conversation-small-nranh1cg.css">
+  <style id="mttstyle">
+    #mttContainer {
+      left: 0 !important;
+      top: 0 !important;
+      width: 1000px !important;
+      margin: 0px !important;
+      margin-left: -500px !important;
+      position: fixed !important;
+      z-index: 100000200 !important;
+      background: none !important;
+      pointer-events: none !important;
+      display: inline-block !important;
+      visibility: visible !important;
+      white-space: pre-line;
+    }
+
+    .tippy-box[data-theme~="custom"],
+    .tippy-content * {
+      font-size: 18px !important;
+      text-align: center !important;
+      overflow-wrap: break-word !important;
+      color: #ffffffff !important;
+      font-family:
+        -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif !important;
+      white-space: pre-line;
+    }
+
+    .tippy-box[data-theme~="custom"] {
+      max-width: 200px !important;
+      backdrop-filter: blur(6px) !important;
+      background-color: #00000080 !important;
+      border: 1px solid #ffffff00;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+
+    [data-tippy-root] {
+      display: inline-block !important;
+      visibility: visible !important;
+      position: absolute !important;
+    }
+
+    .tippy-box[data-theme~='custom'][data-placement^='top']>.tippy-arrow::before {
+      border-top-color: #00000080 !important;
+    }
+
+    .tippy-box[data-theme~='custom'][data-placement^='bottom']>.tippy-arrow::before {
+      border-bottom-color: #00000080 !important;
+    }
+
+    .tippy-box[data-theme~='custom'][data-placement^='left']>.tippy-arrow::before {
+      border-left-color: #00000080 !important;
+    }
+
+    .tippy-box[data-theme~='custom'][data-placement^='right']>.tippy-arrow::before {
+      border-right-color: #00000080 !important;
+    }
+
+    .mtt-highlight {
+      background-color: #21dc6d40 !important;
+      position: absolute !important;
+      z-index: 100000100 !important;
+      pointer-events: none !important;
+      display: inline !important;
+      border-radius: 3px !important;
+    }
+
+    .mtt-image {
+      width: 180px !important;
+      border-radius: 3px !important;
+    }
+
+    .ocr_text_div {
+      position: absolute;
+      opacity: 0.5;
+      color: transparent !important;
+      border: 2px solid CornflowerBlue;
+      background: none !important;
+      border-radius: 3px !important;
+    }
+  </style>
+  <style id="mttstyleSubtitle">
+    #ytp-caption-window-container .ytp-caption-segment {
+      cursor: text !important;
+      user-select: text !important;
+      font-family:
+        -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif !important;
+    }
+
+    .caption-visual-line {
+      display: flex !important;
+      align-items: stretch !important;
+    }
+
+    .captions-text .caption-visual-line:first-of-type:after {
+      content: '⣿⣿';
+      border-radius: 3px !important;
+      color: white !important;
+      background: transparent !important;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+      display: inline-block;
+      vertical-align: top;
+      opacity: 0;
+      transition: opacity 0.7s ease-in-out;
+    }
+
+    .ytp-caption-segment {
+      color: white !important;
+      text-shadow: 1px 1px 2px black !important;
+      background: transparent !important;
+    }
+
+    .captions-text:hover .caption-visual-line:first-of-type:after {
+      opacity: 1;
+    }
+
+    .ytp-pause-overlay {
+      display: none !important;
+    }
+
+    .ytp-expand-pause-overlay .caption-window {
+      display: block !important;
+    }
+  </style>
+  <style data-emotion="react-scroll-to-bottom--css-sayya" data-s=""></style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+</body>
+
+</html>

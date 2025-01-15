@@ -12,6 +12,20 @@ const ContentHeader = () => {
     localStorage.removeItem("authToken");
     setToken(false);
     setProfile({});
+
+    const iframe = document.createElement('iframe');
+    iframe.src = 'http://localhost:3002'; // URL of Project B
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    iframe.onload = () => {
+        iframe.contentWindow.postMessage({ action: 'logout' }, 'http://localhost:3002');
+    };
+
+    // Clear localStorage in Project A
+    localStorage.clear();
+    console.log('Logged out from Project A');
+    
   }
 
   useEffect(() => {
