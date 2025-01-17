@@ -1,7 +1,7 @@
 const fetchWithAuth = async (endpoint, method="GET", body) => {
   const token = localStorage.getItem('authToken');
   const url = process.env.REACT_APP_BACKEND_URL + endpoint;
-
+  
   const headers = {
     "Content-Type" : "application/json",
     "Authentication" : token ? `Bearer ${token}` : null

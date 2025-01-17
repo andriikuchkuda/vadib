@@ -37,33 +37,140 @@ app.use("/sales", salesRoutes);
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000;
 
-app.post('/chat', async (req, res) => {
-  const {message} = req.body;
+// Your OpenAI API key
+const API_KEY = process.env.OPENAI_API_KEY;
 
-  if (!message) {
-    return res.status(400).json({ error: 'Message is required' });
-  }
+// OpenAI API endpoint
+const API_URL = process.env.API_URL;
 
+async function callChatGPTWithStreaming() {
   try {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
-        model: 'gpt-3.5-turbo', // Or any other model you want to use
-        messages: [{ role: 'user', content: message }],
+        model: 'gpt-4',
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant.' },
+          { role: 'user', content: 'Tell me a story.' }
+        ],
+        stream: true,
       },
       {
         headers: {
+          'Authorization': `Bearer ${API_KEY}`,
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
         },
+        responseType: 'stream', // This is crucial for streaming data
       }
     );
 
-    const reply = response.data.choices[0].message.content;
-    res.json({ reply });
+    // Process the streaming response
+    let fullMessage = '';
+    response.data.on('data', (chunk) => {
+      // Convert chunk to string and process it
+      const lines = chunk.toString().split('\n').filter(line => line.trim() !== '');
+
+      for (const line of lines) {
+        if (line === 'data: [DONE]') {
+          // End of the stream
+          console.log('\nStreaming complete.');
+          return;
+        }
+
+        if (line.startsWith('data: ')) {
+          try {
+            const json = JSON.parse(line.substring(6)); // Extract JSON payload
+            if (json.choices && json.choices[0].delta && json.choices[0].delta.content) {
+              const content = json.choices[0].delta.content;
+              fullMessage += content; // Append to the full message
+              process.stdout.write(content); // Optionally log to console in real-time
+            }
+          } catch (err) {
+            console.error('Error parsing JSON line:', line, err);
+          }
+        }
+      }
+    });
+
+    response.data.on('end', () => {
+      console.log('\nFinal Message:', fullMessage);
+    });
+
+
   } catch (error) {
-    console.error('Error communicating with OpenAI API:', error.message);
-    res.status(500).json({ error: 'Something went wrong' });
+    console.error('Error:', error.response?.data || error.message);
+  }
+}
+
+// callChatGPTWithStreaming();
+
+app.post('/chat', async (req, res) => {
+  const { messages } = req.body;
+
+  if (!messages) {
+    return res.status(400).json({ error: 'Invalid request body. "messages" must be an array.' });
+  }
+
+  try {
+    const response = await axios.post(API_URL, {
+      model: 'gpt-4', // or 'gpt-3.5-turbo'
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'user', content: messages }
+      ],
+      stream: true, // Enable streaming
+    }, {
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      responseType: 'stream', // Indicate that response is a stream
+    });
+
+    // Set headers for streaming response
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+
+    let fullMessage = '';
+    response.data.on('data', (chunk) => {
+      const lines = chunk.toString().split('\n').filter(line => line.trim() !== '');
+
+      for (const line of lines) {
+        if (line === 'data: [DONE]') {
+          res.write('\n'); // Send a newline to indicate end of streaming
+          res.end(); // Close the response
+          return;
+        }
+
+        if (line.startsWith('data: ')) {
+          try {
+            const json = JSON.parse(line.substring(6)); // Extract JSON payload
+            if (json.choices && json.choices[0].delta && json.choices[0].delta.content) {
+              const content = json.choices[0].delta.content;
+              fullMessage += content; // Append to the full message
+              process.stdout.write(content); // Optionally log to console in real-time
+              res.write(content); // Stream content to the frontend
+            }
+          } catch (err) {
+            console.error('Error parsing JSON line:', line, err);
+          }
+        }
+      }
+    });
+
+    response.data.on('end', () => {
+      console.log('Streaming complete. Final message:', fullMessage);
+    });
+
+    response.data.on('error', (err) => {
+      console.error('Stream error:', err);
+      res.status(500).send('Error streaming data from OpenAI.');
+    });
+
+  } catch (error) {
+    console.error('Error with ChatGPT API:', error.response?.data || error.message);
+    res.status(500).json({ error: 'Failed to fetch data from OpenAI.' });
   }
 });
 

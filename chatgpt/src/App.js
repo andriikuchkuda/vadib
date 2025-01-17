@@ -6,9 +6,6 @@ import SideBar from './component/layout/SideBar';
 
 import LayoutContext from './context/AuthContext';
 
-import fetchWithAuth from "./utils/fetch";
-
-
 const App = () => {
   const [sideBarToggleBtnShow, setSideBarToggleBtnShow] = useState(false);
   const [sideBarWidth, setSideBarWidth] = useState(260);

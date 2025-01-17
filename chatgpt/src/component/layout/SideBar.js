@@ -10,7 +10,7 @@ const SideBar = () => {
 
   return (
     <div className="z-[21] flex-shrink-0 overflow-x-hidden bg-token-sidebar-surface-primary max-md:!w-0"
-      style={{ "width": `${sideBarWidth}px`, "transition" : "width 0.6s ease" }}>
+      style={{ "width": `${sideBarWidth}px`, "transition" : "width 0.3s ease" }}>
       <div className="h-full w-[260px]">
         <div className="flex h-full min-h-0 flex-col">
           <div className="draggable relative h-full w-full flex-1 items-start border-white/20">
@@ -24,13 +24,13 @@ const SideBar = () => {
                   <svg
                     width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                     className="icon-xl-heavy max-md:hidden">
-                    <path fill-rule="evenodd" clipRule="evenodd"
+                    <path fillRule="evenodd" clipRule="evenodd"
                       d="M8.85719 3H15.1428C16.2266 2.99999 17.1007 2.99998 17.8086 3.05782C18.5375 3.11737 19.1777 3.24318 19.77 3.54497C20.7108 4.02433 21.4757 4.78924 21.955 5.73005C22.2568 6.32234 22.3826 6.96253 22.4422 7.69138C22.5 8.39925 22.5 9.27339 22.5 10.3572V13.6428C22.5 14.7266 22.5 15.6008 22.4422 16.3086C22.3826 17.0375 22.2568 17.6777 21.955 18.27C21.4757 19.2108 20.7108 19.9757 19.77 20.455C19.1777 20.7568 18.5375 20.8826 17.8086 20.9422C17.1008 21 16.2266 21 15.1428 21H8.85717C7.77339 21 6.89925 21 6.19138 20.9422C5.46253 20.8826 4.82234 20.7568 4.23005 20.455C3.28924 19.9757 2.52433 19.2108 2.04497 18.27C1.74318 17.6777 1.61737 17.0375 1.55782 16.3086C1.49998 15.6007 1.49999 14.7266 1.5 13.6428V10.3572C1.49999 9.27341 1.49998 8.39926 1.55782 7.69138C1.61737 6.96253 1.74318 6.32234 2.04497 5.73005C2.52433 4.78924 3.28924 4.02433 4.23005 3.54497C4.82234 3.24318 5.46253 3.11737 6.19138 3.05782C6.89926 2.99998 7.77341 2.99999 8.85719 3ZM6.35424 5.05118C5.74907 5.10062 5.40138 5.19279 5.13803 5.32698C4.57354 5.6146 4.1146 6.07354 3.82698 6.63803C3.69279 6.90138 3.60062 7.24907 3.55118 7.85424C3.50078 8.47108 3.5 9.26339 3.5 10.4V13.6C3.5 14.7366 3.50078 15.5289 3.55118 16.1458C3.60062 16.7509 3.69279 17.0986 3.82698 17.362C4.1146 17.9265 4.57354 18.3854 5.13803 18.673C5.40138 18.8072 5.74907 18.8994 6.35424 18.9488C6.97108 18.9992 7.76339 19 8.9 19H9.5V5H8.9C7.76339 5 6.97108 5.00078 6.35424 5.05118ZM11.5 5V19H15.1C16.2366 19 17.0289 18.9992 17.6458 18.9488C18.2509 18.8994 18.5986 18.8072 18.862 18.673C19.4265 18.3854 19.8854 17.9265 20.173 17.362C20.3072 17.0986 20.3994 16.7509 20.4488 16.1458C20.4992 15.5289 20.5 14.7366 20.5 13.6V10.4C20.5 9.26339 20.4992 8.47108 20.4488 7.85424C20.3994 7.24907 20.3072 6.90138 20.173 6.63803C19.8854 6.07354 19.4265 5.6146 18.862 5.32698C18.5986 5.19279 18.2509 5.10062 17.6458 5.05118C17.0289 5.00078 16.2366 5 15.1 5H11.5ZM5 8.5C5 7.94772 5.44772 7.5 6 7.5H7C7.55229 7.5 8 7.94772 8 8.5C8 9.05229 7.55229 9.5 7 9.5H6C5.44772 9.5 5 9.05229 5 8.5ZM5 12C5 11.4477 5.44772 11 6 11H7C7.55229 11 8 11.4477 8 12C8 12.5523 7.55229 13 7 13H6C5.44772 13 5 12.5523 5 12Z"
                       fill="currentColor"></path>
                   </svg>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                     className="icon-xl-heavy md:hidden">
-                    <path fill-rule="evenodd" clipRule="evenodd"
+                    <path fillRule="evenodd" clipRule="evenodd"
                       d="M3 8C3 7.44772 3.44772 7 4 7H20C20.5523 7 21 7.44772 21 8C21 8.55228 20.5523 9 20 9H4C3.44772 9 3 8.55228 3 8ZM3 16C3 15.4477 3.44772 15 4 15H14C14.5523 15 15 15.4477 15 16C15 16.5523 14.5523 17 14 17H4C3.44772 17 3 16.5523 3 16Z"
                       fill="currentColor"></path>
                   </svg>
@@ -40,7 +40,7 @@ const SideBar = () => {
                   className="h-10 rounded-lg px-2 text-token-text-secondary focus-visible:outline-0 disabled:text-token-text-quaternary focus-visible:bg-token-sidebar-surface-secondary enabled:hover:bg-token-sidebar-surface-secondary"><svg
                     width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                     className="icon-xl-heavy">
-                    <path fill-rule="evenodd" clipRule="evenodd"
+                    <path fillRule="evenodd" clipRule="evenodd"
                       d="M10.75 4.25C7.16015 4.25 4.25 7.16015 4.25 10.75C4.25 14.3399 7.16015 17.25 10.75 17.25C14.3399 17.25 17.25 14.3399 17.25 10.75C17.25 7.16015 14.3399 4.25 10.75 4.25ZM2.25 10.75C2.25 6.05558 6.05558 2.25 10.75 2.25C15.4444 2.25 19.25 6.05558 19.25 10.75C19.25 12.7369 18.5683 14.5645 17.426 16.0118L21.4571 20.0429C21.8476 20.4334 21.8476 21.0666 21.4571 21.4571C21.0666 21.8476 20.4334 21.8476 20.0429 21.4571L16.0118 17.426C14.5645 18.5683 12.7369 19.25 10.75 19.25C6.05558 19.25 2.25 15.4444 2.25 10.75Z"
                       fill="currentColor"></path>
                   </svg></button></span><span className="flex" data-state="closed"><button aria-label="New chat"
@@ -98,7 +98,7 @@ const SideBar = () => {
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                           className="icon-md">
                           <g transform="rotate(45 12 12)">
-                            <path fill-rule="evenodd" clipRule="evenodd"
+                            <path fillRule="evenodd" clipRule="evenodd"
                               d="M12 3C12.2652 3 12.5196 3.10536 12.7071 3.29289L19.7071 10.2929C20.0976 10.6834 20.0976 11.3166 19.7071 11.7071C19.3166 12.0976 18.6834 12.0976 18.2929 11.7071L13 6.41421V20C13 20.5523 12.5523 21 12 21C11.4477 21 11 20.5523 11 20V6.41422L5.70711 11.7071C5.31658 12.0976 4.68342 12.0976 4.29289 11.7071C3.90237 11.3166 3.90237 10.6834 4.29289 10.2929L11.2929 3.29289C11.4804 3.10536 11.7348 3 12 3Z"
                               fill="currentColor"></path>
                           </g>
@@ -160,13 +160,13 @@ const SideBar = () => {
                       <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center"><svg width="24" height="24"
                         viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                         className="icon-md text-token-text-primary">
-                        <path fill-rule="evenodd" clipRule="evenodd"
+                        <path fillRule="evenodd" clipRule="evenodd"
                           d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                           fill="currentColor"></path>
                       </svg></div>
                       <div className="flex grow items-center gap-1">1 more<svg width="24" height="24" viewBox="0 0 24 24"
                         fill="none" xmlns="http://www.w3.org/2000/svg" className="icon-xs">
-                        <path fill-rule="evenodd" clipRule="evenodd"
+                        <path fillRule="evenodd" clipRule="evenodd"
                           d="M5.29289 9.29289C5.68342 8.90237 6.31658 8.90237 6.70711 9.29289L12 14.5858L17.2929 9.29289C17.6834 8.90237 18.3166 8.90237 18.7071 9.29289C19.0976 9.68342 19.0976 10.3166 18.7071 10.7071L12.7071 16.7071C12.5196 16.8946 12.2652 17 12 17C11.7348 17 11.4804 16.8946 11.2929 16.7071L5.29289 10.7071C4.90237 10.3166 4.90237 9.68342 5.29289 9.29289Z"
                           fill="currentColor"></path>
                       </svg></div>
@@ -176,16 +176,16 @@ const SideBar = () => {
                       <div className="flex h-6 w-6 items-center justify-center text-token-text-secondary"><svg
                         width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                         className="icon-md">
-                        <path fill-rule="evenodd" clipRule="evenodd"
+                        <path fillRule="evenodd" clipRule="evenodd"
                           d="M6.75 4.5C5.50736 4.5 4.5 5.50736 4.5 6.75C4.5 7.99264 5.50736 9 6.75 9C7.99264 9 9 7.99264 9 6.75C9 5.50736 7.99264 4.5 6.75 4.5ZM2.5 6.75C2.5 4.40279 4.40279 2.5 6.75 2.5C9.09721 2.5 11 4.40279 11 6.75C11 9.09721 9.09721 11 6.75 11C4.40279 11 2.5 9.09721 2.5 6.75Z"
                           fill="currentColor"></path>
-                        <path fill-rule="evenodd" clipRule="evenodd"
+                        <path fillRule="evenodd" clipRule="evenodd"
                           d="M17.25 4.5C16.0074 4.5 15 5.50736 15 6.75C15 7.99264 16.0074 9 17.25 9C18.4926 9 19.5 7.99264 19.5 6.75C19.5 5.50736 18.4926 4.5 17.25 4.5ZM13 6.75C13 4.40279 14.9028 2.5 17.25 2.5C19.5972 2.5 21.5 4.40279 21.5 6.75C21.5 9.09721 19.5972 11 17.25 11C14.9028 11 13 9.09721 13 6.75Z"
                           fill="currentColor"></path>
-                        <path fill-rule="evenodd" clipRule="evenodd"
+                        <path fillRule="evenodd" clipRule="evenodd"
                           d="M6.75 15C5.50736 15 4.5 16.0074 4.5 17.25C4.5 18.4926 5.50736 19.5 6.75 19.5C7.99264 19.5 9 18.4926 9 17.25C9 16.0074 7.99264 15 6.75 15ZM2.5 17.25C2.5 14.9028 4.40279 13 6.75 13C9.09721 13 11 14.9028 11 17.25C11 19.5972 9.09721 21.5 6.75 21.5C4.40279 21.5 2.5 19.5972 2.5 17.25Z"
                           fill="currentColor"></path>
-                        <path fill-rule="evenodd" clipRule="evenodd"
+                        <path fillRule="evenodd" clipRule="evenodd"
                           d="M17.25 15C16.0074 15 15 16.0074 15 17.25C15 18.4926 16.0074 19.5 17.25 19.5C18.4926 19.5 19.5 18.4926 19.5 17.25C19.5 16.0074 18.4926 15 17.25 15ZM13 17.25C13 14.9028 14.9028 13 17.25 13C19.5972 13 21.5 14.9028 21.5 17.25C21.5 19.5972 19.5972 21.5 17.25 21.5C14.9028 21.5 13 19.5972 13 17.25Z"
                           fill="currentColor"></path>
                       </svg></div><span className="text-sm">Explore GPTs</span>
@@ -238,7 +238,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -261,7 +261,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -284,7 +284,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -308,7 +308,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -341,7 +341,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -364,7 +364,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -387,7 +387,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -410,7 +410,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -433,7 +433,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -456,7 +456,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -479,7 +479,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -502,7 +502,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -525,7 +525,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -548,7 +548,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -571,7 +571,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -594,7 +594,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -617,7 +617,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -640,7 +640,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -663,7 +663,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -686,7 +686,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -709,7 +709,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -732,7 +732,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -755,7 +755,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -778,7 +778,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -801,7 +801,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -824,7 +824,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -857,7 +857,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -880,7 +880,7 @@ const SideBar = () => {
                                   aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                     className="icon-md">
-                                    <path fill-rule="evenodd" clipRule="evenodd"
+                                    <path fillRule="evenodd" clipRule="evenodd"
                                       d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
                                       fill="currentColor"></path>
                                   </svg></button></span>
@@ -900,7 +900,7 @@ const SideBar = () => {
                     className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-token-border-light"><svg
                       width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                       className="icon-sm">
-                      <path fill-rule="evenodd" clipRule="evenodd"
+                      <path fillRule="evenodd" clipRule="evenodd"
                         d="M12.5001 3.44338C12.1907 3.26474 11.8095 3.26474 11.5001 3.44338L4.83984 7.28868C4.53044 7.46731 4.33984 7.79744 4.33984 8.1547V15.8453C4.33984 16.2026 4.53044 16.5327 4.83984 16.7113L11.5001 20.5566C11.8095 20.7353 12.1907 20.7353 12.5001 20.5566L19.1604 16.7113C19.4698 16.5327 19.6604 16.2026 19.6604 15.8453V8.1547C19.6604 7.79744 19.4698 7.46731 19.1604 7.28868L12.5001 3.44338ZM10.5001 1.71133C11.4283 1.17543 12.5719 1.17543 13.5001 1.71133L20.1604 5.55663C21.0886 6.09252 21.6604 7.0829 21.6604 8.1547V15.8453C21.6604 16.9171 21.0886 17.9075 20.1604 18.4434L13.5001 22.2887C12.5719 22.8246 11.4283 22.8246 10.5001 22.2887L3.83984 18.4434C2.91164 17.9075 2.33984 16.9171 2.33984 15.8453V8.1547C2.33984 7.0829 2.91164 6.09252 3.83984 5.55663L10.5001 1.71133Z"
                         fill="currentColor"></path>
                       <path
